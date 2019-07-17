@@ -23,6 +23,8 @@ import requests
 
 # Create a Flask instance with the name of the running application
 app = Flask(__name__)
+# Used by Flash message to create sessions for the users
+app.secret_key = 'super_secret_key'
 # Google OAuth 2.0
 CLIENT_ID = json.loads(
     open('/var/www/catalog/client_secrets.json', 'r').read())['web']['client_id']
@@ -472,7 +474,7 @@ def itemJSON(category_id, item_id):
 
 if __name__ == '__main__':
     # Used by Flash message to create sessions for the users
-    app.secret_key = 'super_secret_key'
+    # app.secret_key = 'super_secret_key'
     # Enables the server to reload itself when it notices a code change
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
