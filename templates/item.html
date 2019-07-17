@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<div class="menu-item">
+				<h4>{{item.title}}</h4>
+				{{item.description}} </br>
+				{% if creator.id == session['user_id'] %}
+				<a href="{{ url_for('editItem', category_id=item.category_id, item_id=item.id) }}">Edit</a> | 
+				<a href="{{ url_for('deleteItem', category_id=item.category_id, item_id=item.id) }}">Delete</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+{% endblock %}

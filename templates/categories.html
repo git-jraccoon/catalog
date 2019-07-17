@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	
+    <div class="flash">  
+		{% with messages = get_flashed_messages() %}
+        {% if messages %}  
+        <ul>
+        {% for message in messages %}
+            <li><strong>{{ message }}</strong></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-4">
+			<h2>Categories</h2>
+			{% if categories !=[] %}
+				<div class="menu-item">
+					{% for i in categories %}
+					<a href="{{ url_for('showCategoryItems', category_id=i.id) }}"><h4>{{i.name}}</h4></a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+		<div class="col-md-5">			
+			<h2>Latest Items</h2>
+			{% if 'username' in session %}
+			<a href="{{ url_for('newItem') }}">Add New Item</a>
+			{% endif %}
+			{% if items !=[] %}
+				<div class="menu-item">
+					{% for i in items %}
+					<a href="{{ url_for('showItem', category_id=i.category_id, item_id=i.id) }}"><h4>{{i.title}} ({{i.category.name}})</h4></a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+{% endblock %}
